@@ -1,5 +1,6 @@
 package HW1;
 import java.util.Scanner;
+
 public class Main 
 {
 	public static void main(String[] args)
@@ -12,19 +13,19 @@ public class Main
 		appointment[4] = new Monthly(15, 12, 2017, "Dentures");
 		
 		Scanner in = new Scanner(System.in);
-		System.out.println("Please input the day of the appointment (1-31) ");
+		System.out.print("Please input the day of the appointment (1-31): ");
 		int day = in.nextInt();
-		System.out.println("Please input the month of the appointment (1-12) ");
+		System.out.print("Please input the month of the appointment (1-12): ");
 		int month = in.nextInt();
-		System.out.println("Please input the year of the appointment ");
+		System.out.print("Please input the year of the appointment: ");
 		int year = in.nextInt();
-		System.out.println(day+" "+month+" "+year);
+		System.out.println("\n" + day + " " + month + " " + year);
 		
 		for (int i = 0; i < 5; i++)
 		{
 			if ((appointment[i].occursOn(day,month,year)) == true)
 			{
-				System.out.println("You have a "+appointment[i].getDesc()+" appointment on: "+day+" "+month+" "+year);
+				System.out.println("You have a " + appointment[i].getDesc() + " appointment on: " + day + " " + month + " " + year);
 			}
 		}
 
