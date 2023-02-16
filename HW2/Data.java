@@ -8,12 +8,27 @@ public class Data
    */
    public static double average(Measurable[] objects)
    {
+
       double sum = 0;
+      double limit = 1000;
+      int count = 0;
+
       for (Measurable obj : objects)
       {
+         if (obj instanceof BankAccount){
+            if (obj.Accept(limit)){
+               sum = sum + obj.getMeasure();
+               count++;
+            }
+         }
+      else {
          sum = sum + obj.getMeasure();
+         count++;
       }
-      if (objects.length > 0) { return sum / objects.length; }
+      if (objects.length > 0) { return sum / count; }
       else { return 0; }
+      }
    }
 }
+
+
