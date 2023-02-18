@@ -6,7 +6,7 @@ public class Monthly extends Appt {
     }
 
     public boolean occursOn(int day, int month, int year) {
-        if (this.getDay() == day && this.getMonth() == month && this.getYear() == year) {
+        if (this.getMonth() == month) {
             return true;
         } else {
             return false;

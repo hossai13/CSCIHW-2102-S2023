@@ -6,7 +6,7 @@ public class Daily extends Appt{
     }
     
     public boolean occursOn(int day, int month, int year){
-        if (this.getMonth() == month && this.getYear() == year){
+        if (this.getDay() == day){
             return true;
         }
         else{
