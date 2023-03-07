@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.PrintWriter;
 
-public class Total {
+public class BabyNames {
     
     public static void main(String[] args) throws FileNotFoundException 
     {
@@ -18,7 +18,7 @@ public class Total {
         System.out.print("Girl Output file: ");
         String girlFileName = console.next();
 
-        File inputFile = new File("C:\\Users\\saimo\\SP2022\\CSCIHW-2102-S2023\\HW3\\babynames.txt");
+        File inputFile = new File(inputFileName);
         Scanner in = new Scanner(inputFile);
 
         PrintWriter boyOut = new PrintWriter(boyFileName);
@@ -26,8 +26,9 @@ public class Total {
 
         double totalc = 0;
         double totalf = 0;
+        boolean found = false;
 
-        while (in.hasNextDouble())
+        while (in.hasNextDouble() && !found)
         {
             String a = in.next();
             String b = in.next();
@@ -42,16 +43,28 @@ public class Total {
 
             totalc += c1;
             totalf += f1;
+
+            if (c1 == 10000000)
+            {
+                boyOut.printf("%s\n", c1);
+                found = true;
+            }
+            if (f1 == 10000000)
+            {
+                girlOut.printf("%s\n", f1);
+                found = true;
+            }
         }
 
-            boyOut.printf("%s\n", totalc);
-            girlOut.printf("%s\n", totalf);
+        boyOut.printf("%s\n", totalc);
+        girlOut.printf("%s\n", totalf);
 
-            in.close();
-            boyOut.close();
-            girlOut.close();
+        in.close();
+        boyOut.close();
+        girlOut.close();
+
     }
-}
+} 
 
 
 
