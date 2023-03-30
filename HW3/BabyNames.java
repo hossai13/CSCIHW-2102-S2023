@@ -26,9 +26,8 @@ public class BabyNames {
 
         double totalc = 0;
         double totalf = 0;
-        boolean found = false;
 
-        while (in.hasNextDouble() && !found)
+        while (in.hasNext())
         {
             String a = in.next();
             String b = in.next();
@@ -43,26 +42,14 @@ public class BabyNames {
 
             totalc += c1;
             totalf += f1;
-
-            if (c1 == 10000000)
-            {
-                boyOut.printf("%s\n", c1);
-                found = true;
-            }
-            if (f1 == 10000000)
-            {
-                girlOut.printf("%s\n", f1);
-                found = true;
-            }
         }
-
+        
         boyOut.printf("%s\n", totalc);
         girlOut.printf("%s\n", totalf);
 
         in.close();
         boyOut.close();
         girlOut.close();
-
     }
 } 
 
