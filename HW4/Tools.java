@@ -6,7 +6,6 @@ public class Tools {
     public static int score2;
     public static int score3;
 
-
     public static int randomNum() {
         Random rand = new Random();
         int num = rand.nextInt(9) + 1;
