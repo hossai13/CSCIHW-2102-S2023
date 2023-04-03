@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class L3 extends Tools{
     public L3 (){
         System.out.println("\nLEVEL 3:");
-        int score = 0;
         int attempt = 0;
     
         Scanner input = new Scanner(System.in);
@@ -25,11 +24,11 @@ public class L3 extends Tools{
 
         int response = input.nextInt();
         if (response == answer){
-            score++;
+            score3++;
             attempt = 0;
-            if (score < 5){
+            if (score3 < 5){
                 for (int i = 0; i < 5; i++){
-                    i = score; 
+                    i = score3; 
                     num1 = Tools.randomNum();
                     num2 = Tools.randomNum();
                     answer = num1 - num2;
@@ -37,7 +36,7 @@ public class L3 extends Tools{
                         System.out.println("\nQ: " + num1 + " - " + num2 + " = ?");
                         response = input.nextInt();
                         if (response == answer){
-                            score++;
+                            score3++;
                             attempt = 0;
                         }
                         else {
@@ -47,7 +46,7 @@ public class L3 extends Tools{
                                 System.out.println("ATTEMPT: " + attempt + "\nQ: " + num1 + " - " + num2 + " = ?");
                                 response = input.nextInt();
                                 if (response == answer) {
-                                    score++;
+                                    score3++;
                                     attempt = 0;
                                     System.out.println("GOOD JOB!");
                                 }
@@ -69,13 +68,26 @@ public class L3 extends Tools{
                 System.out.println("ATTEMPT: " + attempt + "\nQ: " + num1 + " - " + num2 + " = ?");
                 response = input.nextInt();
                 if (response == answer) {
-                    score++;
+                    score3++;
                     attempt = 0;
                     System.out.println("GOOD JOB!");
                 }
                 else{
-                    System.out.println("\nATTEMPT: 2/2 \nGAME OVER!");
+                    if (answer >= 0) {
+                        System.out.println("Q: " + num1 + " - " + num2 + " = ?");
+                    }
+                    else if (answer < 0) {
+                        num1 = Tools.randomNum();
+                        num2 = Tools.randomNum();
+                        answer = num1 - num2;
+                        attempt = 0;
+                    }
                     attempt++;
+                    System.out.println("ATTEMPT: 2/2 \n\nGAME OVER!");
+                    int score = score1 + score2 + score3;
+                    System.out.println("FINAL SCORE: " + score);
+                    System.out.println("End of Math Games");
+                    System.exit(0);
                 }
             }
         }
