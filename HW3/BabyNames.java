@@ -24,8 +24,11 @@ public class BabyNames {
         PrintWriter boyOut = new PrintWriter(boyFileName);
         PrintWriter girlOut = new PrintWriter(girlFileName);
 
+        double totalb = 0;
         double totalc = 0;
         double totalf = 0;
+        double total = 0;
+        
 
         while (in.hasNext())
         {
@@ -42,6 +45,16 @@ public class BabyNames {
 
             totalc += c1;
             totalf += f1;
+
+            totalb = totalb + c1;
+            total = total + c1;
+            if (total > 1000000){
+                System.out.println(b);
+                total = total + f1; 
+            }
+            if (total > 1000000){
+                System.out.println(e);
+            }
         }
         
         boyOut.printf("%s\n", totalc);
