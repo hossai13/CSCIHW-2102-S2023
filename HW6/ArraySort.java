@@ -3,16 +3,6 @@ import java.util.Random;
 import java.util.Arrays;
 
 public class ArraySort {
-    /*
-    Create an integer array of size of 10. Randomly populate the array  with integer from 1 to 100 into the array.
-    Apply Selection Sort to the unsorted array. Create a counter to count the number of iteration needed to complete the sort of of the array. Display the result of the array after the sort, and the counter.
-    
-    Apply Merge Sort to the unsorted array. Create a counter to count the number of iteration needed to complete the sort of of the array. Display the result of the array after the sort, and the counter.
-
-
-    repeat the above for an array of 10000 elements.
-    Which sorting method would you recommend and why?
-     */
     public static void main (String[] args) {
         Random rand = new Random();
         int[] array = new int[10];
@@ -21,28 +11,29 @@ public class ArraySort {
         for (int i = 0; i < array.length; i++) {
             array[i] = rand.nextInt(100);
         }
-        //System.out.println("Array (10): " + Arrays.toString(array));
-        //SelectionSort(array);
-        //System.out.println("Sorted Array (10) Using Selection Sort: " + Arrays.toString(array));
+        
+        System.out.println("Array (10): " + Arrays.toString(array));
 
         for (int i = 0; i < array2.length; i++) {
             array2[i] = rand.nextInt(100);
         }
-        //System.out.println("\nArray (10,000): " + Arrays.toString(array2));
-        //SelectionSort(array2);
-        //System.out.println("Sorted Array (10,000) Using Selection Sort: " + Arrays.toString(array2));
+        System.out.println("\nArray (10,000): " + Arrays.toString(array2));
 
         System.out.println("\n----------------------------------------\n");
 
-        System.out.println("Array (10): " + Arrays.toString(array));
-        MergeSort(array);
-        System.out.println("Sorted Array (10) Using Merge Sort: " + Arrays.toString(array));
+        System.out.println("Sorted Array (10) Using Selection Sort: " + Arrays.toString(array));
+        SelectionSort(array);
 
-        System.out.println("\nArray (10,000): " + Arrays.toString(array2));
+        System.out.println("\nSorted Array (10,000) Using Selection Sort: " + Arrays.toString(array2));
+        SelectionSort(array2);
+
+        System.out.println("\n----------------------------------------\n");
+
+        System.out.println("Sorted Array (10) Using Merge Sort: " + Arrays.toString(array));
+        MergeSort(array);
+        
+        System.out.println("\nSorted Array (10,000) Using Merge Sort: " + Arrays.toString(array2));
         MergeSort(array2);
-        //why does this not worK?
-        //a: because it's too many iterations
-        System.out.println("Sorted Array (10,000) Using Merge Sort: " + Arrays.toString(array2));
     }
 
     public static void SelectionSort(int[] array) {
@@ -61,54 +52,56 @@ public class ArraySort {
             array[min] = array[i];
             array[i] = temp;
         }
-        System.out.println("Number of Iterations Using Selection Sort: " + counter);
+        System.out.println("\nNumber of Iterations Using Selection Sort: " + (counter));
     }
     
     public static void MergeSort(int[] array) {
         int counter = 0;
-        if (array.length > 1) {
-            int[] left = leftHalf(array);
-            int[] right = rightHalf(array);
-            MergeSort(left);
-            MergeSort(right);
-            merge(array, left, right);
-            counter++;
-        }
-        System.out.println("Number of Iterations Using Merge Sort: " + counter);
-    }
-
-    public static int[] leftHalf(int[] array) {
-        int size1 = array.length / 2;
-        int[] left = new int[size1];
-        for (int i = 0; i < size1; i++) {
-            left[i] = array[i];
-        }
-        return left;
-    }
-
-    public static int[] rightHalf(int[] array) {
-        int size1 = array.length / 2;
-        int size2 = array.length - size1;
-        int[] right = new int[size2];
-        for (int i = 0; i < size2; i++) {
-            right[i] = array[i + size1];
-        }
-        return right;
-    }
-
-    public static void merge(int[] result, int[] left, int[] right) {
-        int i1 = 0;   
-        int i2 = 0;   
-        for (int i = 0; i < result.length; i++) {
-            if (i2 >= right.length || (i1 < left.length && left[i1] <= right[i2])) {
-                result[i] = left[i1];   
-                i1++;
-            } else {
-                result[i] = right[i2];   
-                i2++;
+        int[] temp = new int[array.length];
+        for (int i = 1; i < array.length; i *= 2) {
+            for (int j = 0; j < array.length - i; j += 2 * i) {
+                Merge(array, temp, j, j + i, Math.min(j + 2 * i, array.length));
+                counter++;
             }
         }
+        System.out.println("\nNumber of Iterations Using Merge Sort: " + counter);
     }
+
+    public static void MergeSort2(int[] array) {
+        int[] temp = new int[array.length];
+        MergeSort2(array, temp, 0, array.length);
+    }
+
+    public static void MergeSort2(int[] array, int[] temp, int left, int right) {
+        if (right - left > 1) {
+            int mid = (left + right) / 2;
+            MergeSort2(array, temp, left, mid);
+            MergeSort2(array, temp, mid, right);
+            Merge(array, temp, left, mid, right);
+        }
+    }
+
+    public static void Merge(int[] array, int[] temp, int left, int mid, int right) {
+        int i = left;
+        int j = mid;
+        for (int k = left; k < right; k++) {
+            if (i == mid) {
+                temp[k] = array[j++];
+            }
+            else if (j == right) {
+                temp[k] = array[i++];
+            }
+            else if (array[j] < array[i]) {
+                temp[k] = array[j++];
+            }
+            else {
+                temp[k] = array[i++];
+            }
+        }
+        for (int k = left; k < right; k++) {
+            array[k] = temp[k];
+        }
+    } 
 }
 
 // Merge Sort is the better sorting method because it has a better time complexity.
